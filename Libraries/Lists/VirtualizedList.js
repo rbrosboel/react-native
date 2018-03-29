@@ -640,7 +640,16 @@ class VirtualizedList extends React.PureComponent<Props, State> {
         0,
         Math.min(prevState.first, getItemCount(data) - 1 - maxToRenderPerBatch),
       ),
-      last: Math.max(0, Math.min(prevState.last, getItemCount(data) - 1)),
+      last: Math.max(
+        0,
+        Math.min(
+          Math.max(
+            prevState.first + maxToRenderPerBatch - 1,
+            prevState.last
+          ),
+          getItemCount(data) - 1
+        )
+      ),
     };
   }
 
